@@ -1,0 +1,67 @@
+@font-face {
+    font-family: AnjaEliane;
+    src: url(Anja\ Eliane\ accent002.ttf);
+}
+
+@keyframes pop-in {
+    from { transform: scale(0); }
+}
+
+* {
+    font-family: AnjaEliane, sans-serif;
+}
+
+body {
+    background-color: beige;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    height: 12vh;
+
+    font-size: 9vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#board {
+    border: 2vmin solid black;
+    border-radius: 4vmin;
+    background-color: gray;
+    padding: 2vmin;
+    position: relative;
+}
+
+#background-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 2vmin;
+}
+
+.tile {
+    width: 16vmin;
+    height: 16vmin;
+    border-radius: 2vmin;
+    transition: 0.3s;
+}
+
+.background-tile {
+    background-color: lightgray;
+}
+
+.active-tile {
+    position: absolute;
+    animation: pop-in 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6vmin;
+}
