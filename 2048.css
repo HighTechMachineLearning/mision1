@@ -9,6 +9,8 @@
 
 :root {
     --transition-duration: 200ms;
+    --tile-size: 16vmin;
+    --gap: 2vmin;
 }
 
 * {
@@ -39,7 +41,7 @@ header {
     border: 2vmin solid black;
     border-radius: 4vmin;
     background-color: gray;
-    padding: 2vmin;
+    padding: var(--gap);
     position: relative;
 }
 
@@ -47,12 +49,12 @@ header {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
-    gap: 2vmin;
+    gap: var(--gap);
 }
 
 .tile {
-    width: 16vmin;
-    height: 16vmin;
+    width: var(--tile-size);
+    height: var(--tile-size);
     border-radius: 2vmin;
     transition: var(--transition-duration);
 }
