@@ -9,11 +9,16 @@ assert_css_var_units("--transition-duration", "ms");
 assert_css_var_units("--tile-size", "vmin");
 assert_css_var_units("--gap", "vmin");
 
+const body = document.getElementById("body");
 const board = document.getElementById("board");
 const tiles = init_grid();
 
 setTimeout(() => spawn_random_tile(), 500);
 setTimeout(() => spawn_random_tile(), 600);
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "O") body.classList.toggle("dark");
+});
 
 document.addEventListener("keydown", (event) => {
     let direction = null;
