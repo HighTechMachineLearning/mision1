@@ -12,9 +12,9 @@ assert_css_var_units("--gap", "vmin");
 const body = document.getElementById("body");
 const board = document.getElementById("board");
 const tiles = init_grid();
+let move_timeout = null;
 
-setTimeout(spawn_random_tile, 500);
-setTimeout(spawn_random_tile, 600);
+reset();
 
 document.addEventListener("keydown", function (event) {
     switch (event.key) {
@@ -23,21 +23,32 @@ document.addEventListener("keydown", function (event) {
         case "ArrowLeft": move(DIRECTION_LEFT); break;
         case "ArrowRight": move(DIRECTION_RIGHT); break;
         case "O": body.classList.toggle("dark"); break;
+        case "R": case "r": reset(); break;
     }
 });
+
+function reset() {
+    clearTimeout(move_timeout?.timeout);
+    for (let i = 0; i < tiles.length; i++) {
+        tiles[i]?.element.remove();
+        tiles[i] = null;
+    }
+    setTimeout(spawn_random_tile, 200);
+    setTimeout(spawn_random_tile, 300);
+}
 
 const DIRECTION_UP = 0;
 const DIRECTION_DOWN = 1;
 const DIRECTION_LEFT = 2;
 const DIRECTION_RIGHT = 3;
 
-function set_flushable_timeout(func, ...args) {
+function set_flushable_timeout(func, time, ...args) {
     const timeout = {
         timeout: null,
         func,
         args,
     };
-    timeout.timeout = setTimeout(flush_timeout, timeout);
+    timeout.timeout = setTimeout(flush_timeout, time, timeout);
     return timeout;
 }
 
@@ -49,7 +60,6 @@ function flush_timeout(timeout) {
     }
 }
 
-let move_timeout = null;
 function move(direction) {
     flush_timeout(move_timeout);
 
